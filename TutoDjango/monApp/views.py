@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from .models import *
 # Create your views here.
-from django.http import HttpResponse
-def home(request,param):
-	return HttpResponse("<h1>Hello " + param + "</h1>")
+from django.http import Http404, HttpResponse
+def home(request):
+    if request.GET and request.GET["test"]:
+        raise Http404
+    string = request.GET["name"]
+    return HttpResponse("Bonjour %s!" %string)
 
 def about(request):
  return HttpResponse("<h1>A propos </h1>")

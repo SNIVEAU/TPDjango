@@ -27,14 +27,12 @@ class Produit(models.Model):
 	
 class Rayon(models.Model):
 	refRayon = models.AutoField(primary_key=True)
-	
+	nomRayon = models.CharField(max_length=100,default="")
 	def __str__(self):
 		return str(self.refRayon)
 
 class Contenir(models.Model):
-	pk = models.CompositePrimaryKey("refProd", "refRayon")
-
-	refProd = models.ForeignKey(Produit, on_delete=models.CASCADE,related_name="produits",  blank=True)
-	refRayon = models.ForeignKey(Rayon,on_delete=models.CASCADE,related_name="rayons",  blank=True)
-	qte = models.IntegerField(default=None)
-	
+    id = models.AutoField(primary_key=True)
+    refProd = models.ForeignKey(Produit, on_delete=models.CASCADE, related_name="produits", blank=True)
+    refRayon = models.ForeignKey(Rayon, on_delete=models.CASCADE, related_name="rayons", blank=True)
+    qte = models.IntegerField(default=None)
