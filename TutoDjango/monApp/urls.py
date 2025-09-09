@@ -5,6 +5,6 @@ urlpatterns = [
  path("about",views.about,name="about"),
  path("contact",views.contact, name="contact"),
  path("produits",views.ListProduits,name="produits"),
- path("statut",views.ListProduits,name="statut"),
- path("categories",views.ListProduits,name="categories")
+ path("statut",views.ListStatus,name="statut"),
+ path("categories",views.ListCategorie,name="categories")
 ]

@@ -31,7 +31,7 @@ def ListStatus(request):
             <li>
             """
     for stat in status:
-        html += "<ul> " + stat.intituleProd + "</ul>"
+        html += "<ul> " + stat.libelle + "</ul>"
 
     html += "</li>"
     return HttpResponse(html)
@@ -43,7 +43,7 @@ def ListCategorie(request):
             <li>
             """
     for cate in categories:
-        html += "<ul> " + cate.intituleProd + "</ul>"
+        html += "<ul> " + cate.nomCat + "</ul>"
 
     html += "</li>"
     return HttpResponse(html)
