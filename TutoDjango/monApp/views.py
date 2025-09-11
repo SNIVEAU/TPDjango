@@ -14,18 +14,23 @@ def about(request):
 def contact(request):
  return HttpResponse("<p> Contact </p>")
 
+# def ListProduits(request):
+#     prdts = Produit.objects.all()
+#     html = """
+#             <h1> Produits
+#             <li>
+#             """
+#     for prod in prdts:
+#         html += "<ul> " + prod.intituleProd + "</ul>"
+
+#     html += "</li>"
+#     return HttpResponse(html)
+
+
 def ListProduits(request):
     prdts = Produit.objects.all()
-    html = """
-            <h1> Produits
-            <li>
-            """
-    for prod in prdts:
-        html += "<ul> " + prod.intituleProd + "</ul>"
+    return render(request, 'monApp/list_produits.html',{'prdts': prdts})
 
-    html += "</li>"
-    return HttpResponse(html)
-    
 
 def ListStatus(request):
     status = Statut.objects.all()

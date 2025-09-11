@@ -28,6 +28,6 @@ Afin de pouvoir afficher ma table contenir dans mon module admin de django j'ai 
 
 Début de l'implémentation des différentes fonctionnalités du mode admin ajout champ éditable, création de nouveaux objets etc
 
-
-
+Séance 4
+Fin de l'implémentation du module admin et début de l'implémentation des templates
 

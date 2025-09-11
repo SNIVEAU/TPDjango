@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Mon app DJANGO</title>
+    </head>
+    <body>
+        <p>Mes produits sont :</p>
+        <ul>
+            {% for prdt in prdts %}
+                <li>{{ prdt.intituleProd }}</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
