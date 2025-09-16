@@ -1,0 +1,35 @@
+{% extends 'monApp/base.html' %}
+
+{% block menu %}
+    <h1>Liste des rayons</h1>
+{% endblock %}
+
+{% block contenu %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom rayon</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rayon in rayons %}
+                <tr>
+                    <td>{{ rayon.refRayon }}</td>
+                    <td>{{ rayon.nomRayon }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>
+        Il y a
+        {% if rayons|length < 5 %}
+            peu de
+        {% elif rayons|length < 10 %}
+            quelques
+        {% else %}
+            beaucoup de
+        {% endif %}
+        rayons.
+    </p>
+{% endblock %}

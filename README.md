@@ -31,3 +31,6 @@ Début de l'implémentation des différentes fonctionnalités du mode admin ajou
 Séance 4
 Fin de l'implémentation du module admin et début de l'implémentation des templates
 
+Séance 5:
+
+Fin du tp2 avec implémentation de templates pour toutes les pages incluant un héritage puis début de css via bootstrap 5

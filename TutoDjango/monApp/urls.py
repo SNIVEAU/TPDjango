@@ -6,5 +6,6 @@ urlpatterns = [
  path("contact",views.contact, name="contact"),
  path("produits",views.ListProduits,name="produits"),
  path("statut",views.ListStatus,name="statut"),
- path("categories",views.ListCategorie,name="categories")
+ path("categories",views.ListCategorie,name="categories"),
+ path("rayons",views.ListRayon,name="rayons")
 ]

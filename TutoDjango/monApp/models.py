@@ -32,7 +32,6 @@ class Rayon(models.Model):
 		return str(self.refRayon)
 
 class Contenir(models.Model):
-    id = models.AutoField(primary_key=True)
-    refProd = models.ForeignKey(Produit, on_delete=models.CASCADE, related_name="produits", blank=True)
-    refRayon = models.ForeignKey(Rayon, on_delete=models.CASCADE, related_name="rayons", blank=True)
-    qte = models.IntegerField(default=None)
+	pk = models.CompositePrimaryKey("refProd", "refRayon")
+	refProd = models.ForeignKey(Produit, on_delete=models.CASCADE, related_name="produits", blank=True)
+	refRayon = models.ForeignKey(Rayon, on_delete=models.CASCADE, related_name="rayons", blank=True)

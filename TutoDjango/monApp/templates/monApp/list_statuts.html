@@ -1,0 +1,35 @@
+{% extends 'monApp/base.html' %}
+
+{% block menu %}
+    <h1>Liste des statuts</h1>
+{% endblock %}
+
+{% block contenu %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libellé</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for statut in status %}
+                <tr>
+                    <td>{{ statut.idStatut }}</td>
+                    <td>{{ statut.libelle }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>
+        Il y a
+        {% if status|length < 5 %}
+            peu de
+        {% elif status|length < 10 %}
+            quelques
+        {% else %}
+            beaucoup de
+        {% endif %}
+        statuts.
+    </p>
+{% endblock %}

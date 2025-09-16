@@ -61,5 +61,4 @@ admin.site.register(Statut)
 class RayonAdmin(admin.ModelAdmin):
     list_display = ('nomRayon',)
 admin.site.register(Rayon,RayonAdmin)
-admin.site.register(Contenir)
 

@@ -9,10 +9,11 @@ def home(request):
     return HttpResponse("Bonjour %s!" %string)
 
 def about(request):
- return HttpResponse("<h1>A propos </h1>")
+    return render(request, 'monApp/about.html')
 
 def contact(request):
- return HttpResponse("<p> Contact </p>")
+    return render(request, 'monApp/contact.html')
+
 
 # def ListProduits(request):
 #     prdts = Produit.objects.all()
@@ -34,24 +35,14 @@ def ListProduits(request):
 
 def ListStatus(request):
     status = Statut.objects.all()
-    html = """
-            <h1> Statut
-            <li>
-            """
-    for stat in status:
-        html += "<ul> " + stat.libelle + "</ul>"
-
-    html += "</li>"
-    return HttpResponse(html)
+    
+    return render(request, 'monApp/list_statuts.html',{'status': status})
 
 def ListCategorie(request):
     categories = Categorie.objects.all()
-    html = """
-            <h1> Catégorie
-            <li>
-            """
-    for cate in categories:
-        html += "<ul> " + cate.nomCat + "</ul>"
+    
+    return render(request, 'monApp/list_categories.html',{'categories': categories})
 
-    html += "</li>"
-    return HttpResponse(html)
+def ListRayon(request):
+    rayons = Rayon.objects.all()
+    return render(request, 'monApp/list_rayons.html',{'rayons': rayons})

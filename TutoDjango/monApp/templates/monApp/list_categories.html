@@ -1,0 +1,35 @@
+{% extends 'monApp/base.html' %}
+
+{% block menu %}
+    <h1>Liste des catégories</h1>
+{% endblock %}
+
+{% block contenu %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom catégorie</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cat in categories %}
+                <tr>
+                    <td>{{ cat.idCat }}</td>
+                    <td>{{ cat.nomCat }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>
+        Il y a
+        {% if categories|length < 5 %}
+            peu de
+        {% elif categories|length < 10 %}
+            quelques
+        {% else %}
+            beaucoup de
+        {% endif %}
+        catégories.
+    </p>
+{% endblock %}
