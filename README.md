@@ -34,3 +34,6 @@ Fin de l'implémentation du module admin et début de l'implémentation des temp
 Séance 5:
 
 Fin du tp2 avec implémentation de templates pour toutes les pages incluant un héritage puis début de css via bootstrap 5
+
+Séance 6 Début du td3 avec implémentation des vues génériques pour le home la page about ainsi que la page contact. Puis création des vues génériques pour la liste d'élements pour chaque table du modèle et création des vues de détail pour produit et rayon.
+
