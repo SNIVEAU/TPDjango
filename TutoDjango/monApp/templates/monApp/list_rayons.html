@@ -1,7 +1,7 @@
 {% extends 'monApp/base.html' %}
 
 {% block menu %}
-    <h1>Liste des rayons</h1>
+    {{titremenu}}
 {% endblock %}
 
 {% block contenu %}
@@ -15,7 +15,7 @@
         <tbody>
             {% for rayon in rayons %}
                 <tr>
-                    <td>{{ rayon.refRayon }}</td>
+                    <td><a href="{% url 'dtl_rayon' rayon.refRayon %}">{{ rayon.refRayon }}</a></td>
                     <td>{{ rayon.nomRayon }}</td>
                 </tr>
             {% endfor %}
