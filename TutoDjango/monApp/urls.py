@@ -16,13 +16,16 @@ urlpatterns = [
 #path("home", views.home, name="home"),
 
 #Route vers les listes de tables du models
-path("home/", views.HomeView.as_view()),
+path("home/", views.HomeView.as_view(),name="home"),
 path("about",views.AboutView.as_view()),
-path("contact",views.ContactView.as_view()),
+path("contact",views.ContactView),
 path("produits/",views.ProduitListView.as_view(),name="lst_prdts"),
 path("statut",views.StatutListView.as_view()),
 path("categories",views.CategorieListView.as_view()),
 path("rayons",views.RayonsListView.as_view(),name="lst_rayons"),
+path('login/', views.ConnectView.as_view(), name='login'),
+path('register/', views.RegisterView.as_view(), name='register'),
+path('logout/', views.DisconnectView.as_view(), name='logout'),
 
 #Route vers les détails
 

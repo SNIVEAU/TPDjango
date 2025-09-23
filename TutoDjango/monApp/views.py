@@ -1,9 +1,13 @@
 from django.shortcuts import render
 from .models import *
+from .forms import *
 from django.views.generic import *
 
-# Create your views here.
-from django.http import Http404, HttpResponse
+
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
+from django.contrib.auth.models import User
 
 class HomeView(TemplateView):
     template_name = "monApp/page_home.html"
@@ -22,16 +26,24 @@ class AboutView(TemplateView):
         return context
     def post(self, request, **kwargs):
         return render(request, self.template_name)
-class ContactView(TemplateView):
-    template_name = "monApp/page_home.html"
-    def get_context_data(self, **kwargs):
-        context = super(ContactView, self).get_context_data(**kwargs)
-        context['titreh1'] = "Nous contacter"
-        return context
-    def post(self, request, **kwargs):
-        return render(request, self.template_name)
-# def ListProduits(request):
-#     prdts = Produit.objects.all()
+# class ContactView(TemplateView):
+#     template_name = "monApp/page_home.html"
+#     def get_context_data(self, **kwargs):
+#         context = super(ContactView, self).get_context_data(**kwargs)
+#         context['titreh1'] = "Nous contacter"
+#         return context
+#     def post(self, request, **kwargs):
+#         return render(request, self.template_name)
+
+
+def ContactView(request):
+    titreh1 = "Contact us !"
+    if request.method=='POST':
+        form = ContactUsForm(request.POST)
+    else:
+        form = ContactUsForm()
+    return render(request, "monApp/page_home.html",{'titreh1':titreh1, 'form':form})# def ListProduits(request):
+    #     prdts = Produit.objects.all()
 #     html = """
 #             <h1> Produits
 #             <li>
@@ -125,3 +137,37 @@ class RayonDetailView(DetailView):
 # def ListRayon(request):
 #     rayons = Rayon.objects.all()
 #     return render(request, 'monApp/list_rayons.html',{'rayons': rayons})
+
+
+class ConnectView(LoginView):
+    template_name = 'monApp/page_login.html'
+
+    def post(self, request, **kwargs):
+        lgn = request.POST.get('username', False)
+        pswrd = request.POST.get('password', False)
+        user = authenticate(username=lgn, password=pswrd)
+        if user is not None and user.is_active:
+            login(request, user)
+            return render(request, 'monApp/page_home.html', {'param': lgn, 'message': "You're connected"})
+        else:
+            return render(request, 'monApp/page_register.html')
+        
+class RegisterView(TemplateView):
+    template_name = 'monApp/page_register.html'
+
+    def post(self, request, **kwargs):
+        username = request.POST.get('username', False)
+        mail = request.POST.get('mail', False)
+        password = request.POST.get('password', False)
+        user = User.objects.create_user(username, mail, password)
+        user.save()
+        if user is not None and user.is_active:
+            return render(request, 'monApp/page_login.html')
+        else:
+            return render(request, 'monApp/page_register.html')
+        
+class DisconnectView(TemplateView):
+    template_name = 'monApp/page_logout.html'
+    def get(self, request, **kwargs):
+        logout(request)
+        return render(request, self.template_name)

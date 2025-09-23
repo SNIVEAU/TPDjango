@@ -35,3 +35,4 @@ class Contenir(models.Model):
 	pk = models.CompositePrimaryKey("refProd", "refRayon")
 	refProd = models.ForeignKey(Produit, on_delete=models.CASCADE, related_name="produits", blank=True)
 	refRayon = models.ForeignKey(Rayon, on_delete=models.CASCADE, related_name="rayons", blank=True)
+

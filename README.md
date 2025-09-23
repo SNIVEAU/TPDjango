@@ -16,7 +16,7 @@ page statut et catégorie à tester et à corriger
 j'ai eu plus de migrations dans la base de données que prévu parce que j'avais oublier de mettre des clés primaires
 
 Fin séance 3:
-supression des pycache dans le git
+suppression des pycache dans le git
 
 début du tp 2 jusqu'a l'introduction des templates
 
@@ -35,5 +35,8 @@ Séance 5:
 
 Fin du tp2 avec implémentation de templates pour toutes les pages incluant un héritage puis début de css via bootstrap 5
 
-Séance 6 Début du td3 avec implémentation des vues génériques pour le home la page about ainsi que la page contact. Puis création des vues génériques pour la liste d'élements pour chaque table du modèle et création des vues de détail pour produit et rayon.
+Séance 6 :
+Début du td3 avec implémentation des vues génériques pour le home la page about ainsi que la page contact. Puis création des vues génériques pour la liste d'élements pour chaque table du modèle et création des vues de détail pour produit et rayon.
 
+
+Séance 7: poursuite du td3 avec l'instanciation des vues de connexion déconnexion et inscritiption et début de l'implémentation des formulaires via le fichiers forms.py pour la page contact
