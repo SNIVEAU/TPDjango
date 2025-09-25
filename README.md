@@ -40,3 +40,7 @@ Début du td3 avec implémentation des vues génériques pour le home la page ab
 
 
 Séance 7: poursuite du td3 avec l'instanciation des vues de connexion déconnexion et inscritiption et début de l'implémentation des formulaires via le fichiers forms.py pour la page contact
+
+
+Séance 8:
+Fin du td 3 avec l'implémenation du formulaire de contact avec l'envoi de mail et début du tp3 avec le formulaire permettant la création d'un produit pas encore fonctionnel
