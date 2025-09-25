@@ -26,6 +26,7 @@ path("rayons",views.RayonsListView.as_view(),name="lst_rayons"),
 path('login/', views.ConnectView.as_view(), name='login'),
 path('register/', views.RegisterView.as_view(), name='register'),
 path('logout/', views.DisconnectView.as_view(), name='logout'),
+path('email-sent/', TemplateView.as_view(template_name='monApp/email-sent.html'), name='email-sent'),
 
 #Route vers les détails
 

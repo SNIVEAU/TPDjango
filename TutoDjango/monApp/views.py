@@ -8,6 +8,8 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+
 
 class HomeView(TemplateView):
     template_name = "monApp/page_home.html"
@@ -36,14 +38,26 @@ class AboutView(TemplateView):
 #         return render(request, self.template_name)
 
 
+from django.shortcuts import redirect
+
 def ContactView(request):
     titreh1 = "Contact us !"
-    if request.method=='POST':
+    if request.method == 'POST':
         form = ContactUsForm(request.POST)
+        if form.is_valid():
+            send_mail(
+                subject=f'Message from {form.cleaned_data["name"] or "anonyme"} via MonProjet Contact Us form',
+                message=form.cleaned_data['message'],
+                from_email=form.cleaned_data['email'],
+                recipient_list=['admin@monprojet.com'],
+            )
+            return redirect('email-sent')
     else:
         form = ContactUsForm()
-    return render(request, "monApp/page_home.html",{'titreh1':titreh1, 'form':form})# def ListProduits(request):
-    #     prdts = Produit.objects.all()
+    return render(request, "monApp/page_home.html", {'titreh1': titreh1, 'form': form})
+
+
+#     prdts = Produit.objects.all()
 #     html = """
 #             <h1> Produits
 #             <li>
@@ -159,6 +173,9 @@ class RegisterView(TemplateView):
         username = request.POST.get('username', False)
         mail = request.POST.get('mail', False)
         password = request.POST.get('password', False)
+        if (len(User.objects.filter(username=username)) != 0):
+            return render(request, 'monApp/page_register.html', {'error': "Ce nom d'utilisateur existe déjà."})
+        
         user = User.objects.create_user(username, mail, password)
         user.save()
         if user is not None and user.is_active:
