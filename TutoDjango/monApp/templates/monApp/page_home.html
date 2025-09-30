@@ -4,7 +4,7 @@
     <h1>Hello {{ param }} !!!</h1>
     <p>{{ message }}</p>
     {% if form %}
-        <form action="" method="post" novalidate>
+        <form action="" method="post" >
             {% csrf_token %}
             {{ form.as_p     }}
             <button type="submit" class="btn btn-success mt-2">Envoyer</button>

@@ -21,6 +21,8 @@
             {% endfor %}
         </tbody>
     </table>
+        <a href="{% url 'crt-ray' %}">Créer un nouveau rayon</a>
+
     <p>
         Il y a
         {% if rayons|length < 5 %}

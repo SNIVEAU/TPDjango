@@ -1,0 +1,10 @@
+{% extends 'monApp/base.html' %}
+
+{% block contenu %}
+    <h2>Créer une nouvelle catégorie</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Créer</button>
+    </form>
+{% endblock %}

@@ -8,4 +8,16 @@ class ContactUsForm(forms.Form):
 class ProduitForm(forms.ModelForm):
     class Meta:
         model = Produit
+        #fields = '__all__'
+        exclude = ('categorie', 'status')
+
+class RayonForm(forms.ModelForm):
+    class Meta:
+        model = Rayon
         fields = '__all__'
+
+class CategorieForm(forms.ModelForm):
+    class Meta:
+        model = Categorie
+        fields = '__all__'
+        

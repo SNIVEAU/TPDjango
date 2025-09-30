@@ -1,0 +1,11 @@
+{% extends 'monApp/base.html' %}
+
+{% block contenu %}
+    <h2>Modifier la catégorie {{ categorie.nomCat }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Modifier</button>
+        <a href="{% url 'dtl-categorie' categorie.idCat %}" class="btn btn-secondary">Annuler</a>
+    </form>
+{% endblock %}

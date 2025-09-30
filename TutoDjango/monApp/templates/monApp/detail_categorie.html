@@ -1,0 +1,17 @@
+{% extends 'monApp/base.html' %}
+
+{% block menu %}
+    <h1>{{ titremenu }}</h1>
+{% endblock %}
+
+{% block contenu %}
+    <h2>Catégorie {{ categorie.idCat }}</h2>
+    <ul>
+        <li>Nom de la catégorie : {{ categorie.nomCat }}</li>
+    </ul>
+
+    <br>
+    <a href="{% url 'categorie-chng' categorie.idCat %}">Modifier cette catégorie</a> |
+    <a href="{% url 'dlt-categorie' categorie.idCat %}">Supprimer cette catégorie</a> |
+    <a href="{% url 'crt-categorie' %}">Créer une nouvelle catégorie</a>
+{% endblock %}
