@@ -110,9 +110,10 @@ class CategorieListView(ListView):
     model = Categorie
     template_name = "monApp/list_categories.html"
     context_object_name = "categories"
-    def get_queryset(self ) :
-        return Categorie.objects.all()
-    
+    def get_queryset(self):
+# Annoter chaque catégorie avec le nombre de produits liés
+        return Categorie.objects.annotate(nb_produits=Count('produits_categorie'))
+
     def get_context_data(self, **kwargs):
         context = super(CategorieListView, self).get_context_data(**kwargs)
         context['titremenu'] = "Liste de mes catégories"

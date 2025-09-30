@@ -6,26 +6,31 @@
 
 {% block contenu %}
     <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom catégorie</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for cat in categories %}
-                <tr>
-                    <td><a href="{% url 'dtl-categorie' cat.idCat %}">{{ cat.idCat }}</a></td>
-                    <td>{{ cat.nomCat }}</td>
-                    <td>
-                        <a href="{% url 'categorie-chng' cat.idCat %}">Modifier</a> |
-                        <a href="{% url 'dlt-categorie' cat.idCat %}">Supprimer</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<thead>
+    <tr>
+        <th>Id</th>
+        <th>Nom catégorie</th>
+        <th>Nombre de Produits</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+<tbody>
+    {% for ctgr in ctgrs %}
+        <tr>
+            <td>
+                <a href="{% url 'dtl-ctgr' ctgr.idCat %}">{{ ctgr.idCat }}</a>
+            </td>
+            <td>{{ ctgr.nomCat }}</td>
+            <td>{{ ctgr.nb_produits }}</td>
+            <td>
+                <a href="{% url 'dtl-ctgr' ctgr.idCat %}" class="btn btn-primary mt-2">Détails</a>
+                <a href="{% url 'ctgr-chng' ctgr.idCat %}" class="btn btn-warning mt-2">Modifier</a>
+                <a href="{% url 'ctgr-dlt' ctgr.idCat %}" class="btn btn-danger mt-2">Supprimer</a>
+            </td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
     <a href="{% url 'crt-categorie' %}">Créer une nouvelle catégorie</a>
     <p>
         Il y a
