@@ -3,7 +3,7 @@ from .models import *
 from .forms import *
 from django.views.generic import *
 from django.db.models import Count
-
+from decimal import Decimal
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
@@ -104,16 +104,22 @@ class RayonsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(RayonsListView, self).get_context_data(**kwargs)
         context['titremenu'] = "Liste de mes rayons"
+        rayons = context['rayons']
+        contenirs = (
+            Contenir.objects
+            .filter(refRayon__in=[r.refRayon for r in rayons])
+            .select_related('refProd', 'refRayon')
+        )
+        rayon_contenirs = {}
+        for c in contenirs:
+            rayon_contenirs.setdefault(c.refRayon.refRayon, []).append(c)
         ryns_dt = []
-        for rayon in context['rayons']:
-            total = 0
-            contenirs = Contenir.objects.filter(refRayon=rayon)
-            for contenir in contenirs:
-                produit = Produit.objects.get(pk=contenir.refProd_id)
-                total += produit.prixUnitaireProd * contenir.Qte
-            ryns_dt.append({'rayon': rayon, 'total_stock': total})
+        for rayon in rayons:
+            contenirs_rayon = rayon_contenirs.get(rayon.refRayon, [])
+            produits = [c.refProd for c in contenirs_rayon]
+            total = sum(c.refProd.prixUnitaireProd * c.Qte for c in contenirs_rayon)
+            ryns_dt.append({'rayon': rayon, 'produits': produits, 'total_stock': total})
         context['ryns_dt'] = ryns_dt
-        print(context)
         return context
 
 class CategorieListView(ListView):
@@ -147,6 +153,16 @@ class RayonDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(RayonDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail du rayon"
+        rayon = self.object
+        contenirs = (
+            Contenir.objects
+            .filter(refRayon=rayon.refRayon)
+            .select_related('refProd')
+        )
+        produits = [c.refProd for c in contenirs]
+        total = sum(c.refProd.prixUnitaireProd * c.Qte for c in contenirs)
+        context['prdts_dt'] = produits
+        context['total_nb_produit'] = total
         return context
 
 class CategorieDetailView(DetailView):
