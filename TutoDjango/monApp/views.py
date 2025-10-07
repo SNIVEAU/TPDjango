@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import *
 from .forms import *
 from django.views.generic import *
+from django.db.models import Count
 
 
 from django.contrib.auth.views import LoginView
@@ -103,8 +104,17 @@ class RayonsListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(RayonsListView, self).get_context_data(**kwargs)
         context['titremenu'] = "Liste de mes rayons"
+        ryns_dt = []
+        for rayon in context['rayons']:
+            total = 0
+            contenirs = Contenir.objects.filter(refRayon=rayon)
+            for contenir in contenirs:
+                produit = Produit.objects.get(pk=contenir.refProd_id)
+                total += produit.prixUnitaireProd * contenir.Qte
+            ryns_dt.append({'rayon': rayon, 'total_stock': total})
+        context['ryns_dt'] = ryns_dt
+        print(context)
         return context
-
 
 class CategorieListView(ListView):
     model = Categorie
@@ -112,7 +122,7 @@ class CategorieListView(ListView):
     context_object_name = "categories"
     def get_queryset(self):
 # Annoter chaque catégorie avec le nombre de produits liés
-        return Categorie.objects.annotate(nb_produits=Count('produits_categorie'))
+        return Categorie.objects.annotate(nb_produits=Count('produits'))
 
     def get_context_data(self, **kwargs):
         context = super(CategorieListView, self).get_context_data(**kwargs)
@@ -144,9 +154,14 @@ class CategorieDetailView(DetailView):
     template_name = "monApp/detail_categorie.html"
     context_object_name = "categorie"
 
+    def get_queryset(self):
+# Annoter chaque catégorie avec le nombre de produits liés
+        return Categorie.objects.annotate(nb_produits=Count('produits'))
     def get_context_data(self, **kwargs):
         context = super(CategorieDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail de la catégorie"
+        context['prdts'] = self.object.produits.all()
+
         return context
 
 #  # Ancienne version de gestion des vues en faisant un render du template

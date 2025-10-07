@@ -15,17 +15,17 @@
     </tr>
 </thead>
 <tbody>
-    {% for ctgr in ctgrs %}
+    {% for ctgr in categories %}
         <tr>
             <td>
-                <a href="{% url 'dtl-ctgr' ctgr.idCat %}">{{ ctgr.idCat }}</a>
+                <a href="{% url 'dtl-categorie' ctgr.idCat %}">{{ ctgr.idCat }}</a>
             </td>
             <td>{{ ctgr.nomCat }}</td>
             <td>{{ ctgr.nb_produits }}</td>
             <td>
-                <a href="{% url 'dtl-ctgr' ctgr.idCat %}" class="btn btn-primary mt-2">Détails</a>
-                <a href="{% url 'ctgr-chng' ctgr.idCat %}" class="btn btn-warning mt-2">Modifier</a>
-                <a href="{% url 'ctgr-dlt' ctgr.idCat %}" class="btn btn-danger mt-2">Supprimer</a>
+                <a href="{% url 'dlt-categorie' ctgr.idCat %}" class="btn btn-primary mt-2">Détails</a>
+                <a href="{% url 'categorie-chng' ctgr.idCat %}" class="btn btn-warning mt-2">Modifier</a>
+                <a href="{% url 'dlt-categorie' ctgr.idCat %}" class="btn btn-danger mt-2">Supprimer</a>
             </td>
         </tr>
     {% endfor %}
