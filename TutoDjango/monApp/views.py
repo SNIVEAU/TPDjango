@@ -184,6 +184,7 @@ class RayonDetailView(DetailView):
         produits = [c.refProd for c in contenirs]
         total = sum(c.refProd.prixUnitaireProd * c.Qte for c in contenirs)
         context['prdts_dt'] = produits
+        print(context['prdts_dt'])
         context['total_nb_produit'] = total
         return context
 @method_decorator(login_required, name='dispatch')
@@ -375,3 +376,44 @@ class ContenirCreateView(CreateView):
     
     def get_success_url(self):
         return reverse_lazy('dtl_rayon', kwargs={'pk': self.kwargs.get('pk')})
+
+@method_decorator(login_required, name='dispatch')
+class ContenirUpdateQteView(UpdateView):
+    model = Contenir
+    form_class = ContenirUpdateQteForm
+    template_name = "monApp/update_contenir_qte.html"
+    
+    def get_object(self):
+        rayon_id = self.kwargs.get('rayon_pk')
+        produit_id = self.kwargs.get('produit_pk')
+        return Contenir.objects.get(refRayon__refRayon=rayon_id, refProd__refProd=produit_id)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rayon'] = self.object.refRayon
+        context['produit'] = self.object.refProd
+        return context
+    
+    def form_valid(self, form):
+        contenir = form.save()
+        return redirect('dtl_rayon', contenir.refRayon.refRayon)
+
+
+@method_decorator(login_required, name='dispatch')
+class ContenirDeleteView(DeleteView):
+    model = Contenir
+    template_name = "monApp/delete_contenir.html"
+    
+    def get_object(self):
+        rayon_id = self.kwargs.get('rayon_pk')
+        produit_id = self.kwargs.get('produit_pk')
+        return Contenir.objects.get(refRayon__refRayon=rayon_id, refProd__refProd=produit_id)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rayon'] = self.object.refRayon
+        context['produit'] = self.object.refProd
+        return context
+    
+    def get_success_url(self):
+        return reverse_lazy('dtl_rayon', kwargs={'pk': self.kwargs.get('rayon_pk')})

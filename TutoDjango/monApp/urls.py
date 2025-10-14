@@ -42,6 +42,8 @@ path("categorie/<pk>/delete/", views.CategorieDeleteView.as_view(), name="dlt-ca
 
 path('rayon/<pk>/cntnr', views.ContenirCreateView.as_view(), name='cntnr-crt'),
 
+path("rayon/<int:rayon_pk>/produit/<int:produit_pk>/update-qte/", views.ContenirUpdateQteView.as_view(), name="cntnr-updt-qte"),
+path("rayon/<int:rayon_pk>/produit/<int:produit_pk>/delete/", views.ContenirDeleteView.as_view(), name="cntnr-dlt"),
 
 #Route vers les détails
 

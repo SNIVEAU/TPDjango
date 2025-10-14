@@ -34,9 +34,10 @@
                                 <div class="card-body">
                                     <ul class="list-unstyled">
                                         <li>Prix unitaire : {{ produit.prixUnitaireProd }} €</li>
-                                        <li>Référence : {{ produit.refProd }}</li>
                                         <li>Date fabrication : {{ produit.dateFabrication }}</li>
                                     </ul>
+                                    <a href="{% url 'cntnr-updt-qte' rayon.refRayon produit.refProd %}" class="btn btn-warning btn-sm mb-1">Modifier quantité</a>
+                                    <a href="{% url 'cntnr-dlt' rayon.refRayon produit.refProd %}" class="btn btn-danger btn-sm mb-1">Supprimer</a>
                                     <a href="{% url 'dtl-prdt' produit.refProd %}" class="btn btn-primary mt-2">Détails</a>
                                 </div>
                             </div>

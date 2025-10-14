@@ -1,0 +1,19 @@
+{% extends 'monApp/base.html' %}
+
+{% block contenu %}
+<h2>Retirer le produit du rayon</h2>
+
+<div class="alert alert-warning">
+    <h4>Attention !</h4>
+    <p>Êtes-vous sûr de vouloir retirer le produit <strong>"{{ produit.intituleProd }}"</strong> 
+    du rayon <strong>"{{ rayon.nomRayon }}"</strong> ?</p>
+    <p>Quantité actuelle : <strong>{{ object.Qte }}</strong></p>
+    <p><em>Note : Le produit ne sera pas supprimé, il sera seulement retiré de ce rayon.</em></p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Oui, retirer du rayon</button>
+    <a href="{% url 'dtl_rayon' rayon.refRayon %}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'monApp/base.html' %}
+
+{% block contenu %}
+<h2>Modifier la quantité de "{{ produit.intituleProd }}" dans le rayon "{{ rayon.nomRayon }}"</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h5>Informations du produit :</h5>
+        <ul>
+            <li>Nom : {{ produit.intituleProd }}</li>
+            <li>Prix : {{ produit.prixUnitaireProd }} €</li>
+            <li>Quantité actuelle : {{ object.Qte }}</li>
+        </ul>
+    </div>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    <a href="{% url 'dtl_rayon' rayon.refRayon %}" class="btn btn-secondary">Annuler</a>
+</form>
+{% endblock %}

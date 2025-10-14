@@ -32,8 +32,20 @@ class Rayon(models.Model):
 		return str(self.refRayon)
 
 class Contenir(models.Model):
-	pk = models.CompositePrimaryKey("refProd", "refRayon")
-	refProd = models.ForeignKey(Produit, on_delete=models.CASCADE, related_name="produits", blank=True)
-	refRayon = models.ForeignKey(Rayon, on_delete=models.CASCADE, related_name="rayons", blank=True)
-	Qte = models.PositiveIntegerField(default=0)
+    pk = models.CompositePrimaryKey("refProd", "refRayon")
+    refProd = models.ForeignKey(Produit, on_delete=models.CASCADE, related_name="produits", blank=True)
+    refRayon = models.ForeignKey(Rayon, on_delete=models.CASCADE, related_name="rayons", blank=True)
+    Qte = models.PositiveIntegerField(default=1)
+    
+    def save(self, *args, **kwargs):
+        if self.Qte == 0:
+            if self.pk: 
+                self.delete()
+                return 
+            else:
+                return
+        super().save(*args, **kwargs)
+    
+    def __str__(self):
+        return f"{self.refProd} dans {self.refRayon} (qté: {self.Qte})"
 

@@ -27,4 +27,27 @@ class ContenirForm(forms.ModelForm):
     class Meta:
         model = Produit
         fields = '__all__'
-        
+
+# Formulaire pour modifier uniquement la quantité
+class ContenirUpdateQteForm(forms.ModelForm):
+    class Meta:
+        model = Contenir
+        fields = ['Qte']
+        widgets = {
+            'Qte': forms.NumberInput(attrs={'class': 'form-control', 'min': '0'})
+        }
+
+# Formulaire pour modifier le produit (basé sur Produit avec quantité)
+class ContenirUpdateProduitForm(forms.ModelForm):
+    Qte = forms.IntegerField(min_value=0, label="Quantité dans le rayon", widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    
+    class Meta:
+        model = Produit
+        fields = ['intituleProd', 'prixUnitaireProd', 'dateFabrication', 'categorie', 'statut']
+        widgets = {
+            'intituleProd': forms.TextInput(attrs={'class': 'form-control'}),
+            'prixUnitaireProd': forms.NumberInput(attrs={'class': 'form-control'}),
+            'dateFabrication': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'categorie': forms.Select(attrs={'class': 'form-control'}),
+            'statut': forms.Select(attrs={'class': 'form-control'}),
+        }
