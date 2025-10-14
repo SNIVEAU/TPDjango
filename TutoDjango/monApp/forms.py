@@ -20,4 +20,11 @@ class CategorieForm(forms.ModelForm):
     class Meta:
         model = Categorie
         fields = '__all__'
+
+class ContenirForm(forms.ModelForm):
+    Qte = forms.CharField(required=True)
+
+    class Meta:
+        model = Produit
+        fields = '__all__'
         

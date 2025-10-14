@@ -39,6 +39,10 @@ path("categorie/<pk>/", views.CategorieDetailView.as_view(), name="dtl-categorie
 path("categorie/<pk>/update/", views.CategorieUpdateView.as_view(), name="categorie-chng"),
 path("categorie/<pk>/delete/", views.CategorieDeleteView.as_view(), name="dlt-categorie"),
 
+
+path('rayon/<pk>/cntnr', views.ContenirCreateView.as_view(), name='cntnr-crt'),
+
+
 #Route vers les détails
 
 path("produit/<pk>/" ,views.ProduitDetailView.as_view(), name="dtl-prdt"),

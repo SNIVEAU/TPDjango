@@ -3,11 +3,20 @@
 {% block menu %}{{titremenu}}{% endblock %}
 
 {% block contenu %}
+<!-- Barre de recherche -->
+<p class="lead mb-3 ml-0">Rechercher un élément...</p>
+<form method="GET" action="">
+<input class="form-control" type="text" name="search" placeholder="Tapez ici votre recherche"
+value="{{ request.GET.search }}">
+<button type="submit" class="btn btn-success mt-2">Rechercher</button>
+</form>
+
 <table class="table">
 <thead>
   <tr>
     <th>Id</th>
     <th>Nom rayon</th>
+    <th>Nb produits contenus</th>
     <th>Valeur marchande du rayon</th>
     <th>Actions</th>
   </tr>
@@ -21,7 +30,8 @@
         </a>
       </td>
       <td>{{ data.rayon.nomRayon }}</td>
-      <td>{{ data.total_stock }}</td>
+      <td>{{ data.nb_produits }}</td>
+      <td><strong>{{ data.total_stock|floatformat:2 }} €</strong></td>
       <td>
         <a href="{% url 'dtl_rayon' data.rayon.refRayon %}" class="btn btn-primary mt-2">Détails</a>
         <a href="{% url 'ray-chng' data.rayon.refRayon %}" class="btn btn-warning mt-2">Modifier</a>
@@ -29,7 +39,7 @@
       </td>
     </tr>
   {% empty %}
-    <tr><td colspan="4">Aucun rayon trouvé.</td></tr>
+    <tr><td colspan="5">Aucun rayon trouvé.</td></tr>
   {% endfor %}
 </tbody>
 </table>

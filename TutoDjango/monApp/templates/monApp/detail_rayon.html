@@ -18,32 +18,33 @@
     <div class="card mb-4">
         <div class="card-header bg-primary text-white">
             <h4>
-                Ce rayon contient <strong>{{ total_nb_produit }}</strong> produit(s) pour un total de
-                <strong>{{ total_rayon|floatformat:2 }} €</strong>
+                Ce rayon contient <strong>{{ prdts_dt|length }}</strong> produit(s) pour un total de
+                <strong>{{ total_nb_produit|floatformat:2 }} €</strong>
             </h4>
         </div>
         <div class="card-body">
             <div class="row">
                 {% if prdts_dt %}
-                    {% for data in prdts_dt %}
+                    {% for produit in prdts_dt %}
                         <div class="col-sm-3">
                             <div class="card mb-2 text-center">
                                 <div class="card-header bg-info text-white">
-                                    <h5 class="card-title">{{ data.produit.intituleProd }}</h5>
+                                    <h5 class="card-title">{{ produit.intituleProd }}</h5>
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-unstyled">
-                                        <li>Prix unitaire : {{ data.prix_unitaire }} €</li>
-                                        <li>Quantité : {{ data.qte }}</li>
-                                        <li>Total : {{ data.total_produit }} €</li>
+                                        <li>Prix unitaire : {{ produit.prixUnitaireProd }} €</li>
+                                        <li>Référence : {{ produit.refProd }}</li>
+                                        <li>Date fabrication : {{ produit.dateFabrication }}</li>
                                     </ul>
-                                    <a href="{% url 'dtl-prdt' data.refProd %}" class="btn btn-primary mt-2">Détails</a>
+                                    <a href="{% url 'dtl-prdt' produit.refProd %}" class="btn btn-primary mt-2">Détails</a>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
+                    <a href="{% url 'cntnr-crt' rayon.refRayon %}" class="btn btn-success">Ajouter un produit </a></h4>
                 {% else %}
-                    <p class="text-muted">Aucun produit trouvé pour cette catégorie.</p>
+                    <p class="text-muted">Aucun produit trouvé pour ce rayon.</p>
                 {% endif %}
             </div>
         </div>

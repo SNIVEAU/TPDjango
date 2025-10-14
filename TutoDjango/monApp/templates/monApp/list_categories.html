@@ -5,7 +5,15 @@
 {% endblock %}
 
 {% block contenu %}
-    <table class="table">
+<!-- Barre de recherche -->
+<p class="lead mb-3 ml-0">Rechercher un élément...</p>
+<form method="GET" action="">
+<input class="form-control" type="text" name="search" placeholder="Tapez ici votre recherche"
+value="{{ request.GET.search }}">
+<button type="submit" class="btn btn-success mt-2">Rechercher</button>
+</form>
+
+<table class="table">
 <thead>
     <tr>
         <th>Id</th>
@@ -23,7 +31,7 @@
             <td>{{ ctgr.nomCat }}</td>
             <td>{{ ctgr.nb_produits }}</td>
             <td>
-                <a href="{% url 'dlt-categorie' ctgr.idCat %}" class="btn btn-primary mt-2">Détails</a>
+                <a href="{% url 'dtl-categorie' ctgr.idCat %}" class="btn btn-primary mt-2">Détails</a>
                 <a href="{% url 'categorie-chng' ctgr.idCat %}" class="btn btn-warning mt-2">Modifier</a>
                 <a href="{% url 'dlt-categorie' ctgr.idCat %}" class="btn btn-danger mt-2">Supprimer</a>
             </td>
@@ -31,16 +39,18 @@
     {% endfor %}
 </tbody>
 </table>
-    <a href="{% url 'crt-categorie' %}">Créer une nouvelle catégorie</a>
-    <p>
-        Il y a
-        {% if categories|length < 5 %}
-            peu de
-        {% elif categories|length < 10 %}
-            quelques
-        {% else %}
-            beaucoup de
-        {% endif %}
-        catégories.
-    </p>
+
+<a href="{% url 'crt-categorie' %}">Créer une nouvelle catégorie</a>
+
+<p>
+    Il y a
+    {% if categories|length < 5 %}
+        peu de
+    {% elif categories|length < 10 %}
+        quelques
+    {% else %}
+        beaucoup de
+    {% endif %}
+    catégories.
+</p>
 {% endblock %}
