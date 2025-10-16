@@ -41,11 +41,12 @@ INSTALLED_APPS = [
     'monApp',
     'debug_toolbar',
     'django_bootstrap5',
-    'django_extensions'
+    'django_extensions',
+    'rest_framework'
 ]
 
 LOGIN_URL = '/monApp/login/'
-
+LOGIN_REDIRECT_URL = '/monApp/home/' 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
